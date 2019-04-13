@@ -803,6 +803,11 @@ colorspace@1.0.x:
     color "0.8.x"
     text-hex "0.0.x"
 
+commander@0.5.2:
+  version "0.5.2"
+  resolved "http://registry.npm.taobao.org/commander/download/commander-0.5.2.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Fcommander%2Fdownload%2Fcommander-0.5.2.tgz#f270326709a115a126cfed5623852439b8e4a3b5"
+  integrity sha1-8nAyZwmhFaEmz+1WI4UkObjko7U=
+
 commander@2.17.x:
   version "2.17.1"
   resolved "http://registry.npm.taobao.org/commander/download/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
@@ -992,6 +997,11 @@ d@^0.1.1, d@~0.1.1:
   integrity sha1-2hhMU10Y2O57oqoim5FACfrhEwk=
   dependencies:
     es5-ext "~0.10.2"
+
+dat.gui@^0.7.6:
+  version "0.7.6"
+  resolved "http://registry.npm.taobao.org/dat.gui/download/dat.gui-0.7.6.tgz#92182a0f2dc96c26910f888238d3839166d82f76"
+  integrity sha1-khgqDy3JbCaRD4iCONODkWbYL3Y=
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -4730,6 +4740,18 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
+stats-js@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/stats-js/download/stats-js-1.0.0.tgz#2bae33b4ec3c84939e7622a9ed0de1b44254e977"
+  integrity sha1-K64ztOw8hJOediKp7Q3htEJU6Xc=
+
+stats@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/stats/download/stats-1.0.0.tgz#4a3f63d81bd52cdecee313dacf1572aff57b7d29"
+  integrity sha1-Sj9j2BvVLN7O4xPazxVyr/V7fSk=
+  dependencies:
+    commander "0.5.2"
+
 stream-combiner@^0.2.2:
   version "0.2.2"
   resolved "http://registry.npm.taobao.org/stream-combiner/download/stream-combiner-0.2.2.tgz#aec8cbac177b56b6f4fa479ced8c1912cee52858"
@@ -4954,6 +4976,11 @@ text-hex@0.0.x:
   version "0.0.0"
   resolved "http://registry.npm.taobao.org/text-hex/download/text-hex-0.0.0.tgz#578fbc85a6a92636e42dd17b41d0218cce9eb2b3"
   integrity sha1-V4+8haapJjbkLdF7QdAhjM6esrM=
+
+three@^0.103.0:
+  version "0.103.0"
+  resolved "http://registry.npm.taobao.org/three/download/three-0.103.0.tgz#63b3dbccc861caad93269618061a73dadebae71b"
+  integrity sha1-Y7PbzMhhyq2TJpYYBhpz2t665xs=
 
 through2-concurrent@^2.0.0:
   version "2.0.0"
@@ -5321,6 +5348,11 @@ vinyl@^2.0.0, vinyl@^2.0.1, vinyl@^2.1.0:
     cloneable-readable "^1.0.0"
     remove-trailing-separator "^1.0.1"
     replace-ext "^1.0.0"
+
+webgl@^0.0.7:
+  version "0.0.7"
+  resolved "http://registry.npm.taobao.org/webgl/download/webgl-0.0.7.tgz#bc4ee95523993a2b624377419e6a2d9beb9d78c1"
+  integrity sha1-vE7pVSOZOitiQ3dBnmotm+udeME=
 
 which-module@^1.0.0:
   version "1.0.0"
