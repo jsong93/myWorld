@@ -1,11 +1,20 @@
 const gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-    jshint = require('gulp-jshint'),
-    minifyHtml = require('gulp-minify-html'),
-    minifyCss = require('gulp-minify-css'),
-    imagemin = require('gulp-imagemin'),
-    $ = require('gulp-load-plugins')
+  uglify = require('gulp-uglify'),
+  rename = require('gulp-rename'),
+  jshint = require('gulp-jshint'),
+  minifyHtml = require('gulp-minify-html'),
+  miniHtml = require('gulp-htmlmin'),
+  minifyCss = require('gulp-minify-css'),
+  imagemin = require('gulp-imagemin'),
+  useref = require('gulp-useref'),
+  csso = require('gulp-csso'),
+  rev = require('gulp-rev'),
+  revReplace = require('gulp-rev-replace'),
+  filter = require('gulp-filter'),
+  clean = require('gulp-clean'),
+  fs = require('fs'),
+  gulpIf = require('gulp-if'),
+  $ = require('gulp-load-plugins')();
 // gulp.task('js', function () {
 //     return gulp.src('dist/js/*.js').pipe(uglify())
 // })
@@ -21,11 +30,12 @@ const gulp = require('gulp'),
 // });
 //js代码的处理
 gulp.task('script', done => {
-    gulp.src('./app.js')
-        .pipe(uglify())
-        .pipe(rename('script.js'))
-        .pipe(gulp.dest('build'))
-    done()
+  gulp
+    .src('./node_modules/jquery/dist/jquery.min.js')
+    .pipe(uglify())
+    .pipe(rename('script.js'))
+    .pipe(gulp.dest('build'));
+  done();
 });
 
 // [20:08:56] The following tasks did not complete: default, script
@@ -40,56 +50,86 @@ gulp.task('script', done => {
 //         .pipe(gulp.dest('build'))
 // })
 
-
 gulp.task('html', done => {
-    gulp.src('./index.html')
-        .pipe(minifyHtml())
-        .pipe(gulp.dest('build'))
-    done()
-})
+  gulp
+    .src('./index.html')
+    .pipe(minifyHtml())
+    .pipe(gulp.dest('build'));
+  done();
+});
 
 gulp.task('css', done => {
-    gulp.src('./index.css')
-        .pipe(minifyCss())
-        .pipe(gulp.dest('build'))
-    done()
-})
-
+  gulp
+    .src('./index.css')
+    .pipe(minifyCss())
+    .pipe(gulp.dest('build'));
+  done();
+});
 
 gulp.task('image', done => {
-    gulp.src('./img/**')
-        .pipe(imagemin({
-            progressive: true,
-            interlaced: true
-        }))
-        .pipe(gulp.dest('build/image'))
-    done()
-})
+  gulp
+    .src('./img/**')
+    .pipe(
+      imagemin({
+        progressive: true,
+        interlaced: true
+      })
+    )
+    .pipe(gulp.dest('build/css/img'));
+  done();
+});
+
+const checkDir = path => {
+  console.log(fs.existsSync(path));
+  return fs.existsSync(path);
+};
 
 // gulp3 可以 gulp4 不可以
 // gulp.task('default', ['script', 'html'], function () {
 //     console.log('default')
 // })
-
 // gulp.task('default', gulp.series('script', 'html', 'image', done => done()))
+gulp.task('clean', d => {
+  if (checkDir('./build')) {
+    gulp.src('./build/').pipe(clean());
+  }
+  d();
+});
 
+gulp.task(
+  'default',
+  gulp.series('clean', 'image', done => {
+    const jsFilter = filter('**/*.js', {
+        restore: true
+      }),
+      cssFilter = filter('**/*.css', {
+        restore: true
+      }),
+      // 第一个参数代表所有 第二个参数代表除了index.html
+      indexHtmlFilter = filter(['**/*', '!index.html'], {
+        restore: true
+      });
 
+    // pump
 
-
-// gulp.task('default', done => {
-//     const jsFilter = filter('**/*.js', {
-//             restore: true
-//         }),
-//         cssFilter = filter('**/*.css', {
-//             restore: true
-//         }),
-//         indexHtmlFilter = filter(['**/*', '!index.html'], {
-//             restore: ture
-//         })
-
-
-//     gulp.src('index.html')
-//         .pipe(useref())
-
-
-// })
+    gulp
+      .src('index.html')
+      .pipe($.useref()) /**找到注释 */
+      .pipe(jsFilter) /**筛选js */
+      .pipe(uglify()) /**压缩js */
+      .pipe(jsFilter.restore) /** 把js文件扔回流里 */
+      .pipe(cssFilter)
+      .pipe(csso())
+      .pipe(cssFilter.restore)
+      .pipe(indexHtmlFilter)
+      .pipe(
+        rev()
+      ) /**前面的filter排除了index.html 然后再打版本号  gulp-rev 为静态文件随机添加hash值 */
+      .pipe(indexHtmlFilter.restore)
+      .pipe(revReplace()) /**更新index中的引用 */
+      // .pipe(minifyHtml()) // 压缩后 js报错
+      // .pipe(miniHtml({ removeComments: true }))
+      .pipe(gulp.dest('build'));
+    done();
+  })
+);
