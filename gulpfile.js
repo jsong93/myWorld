@@ -14,6 +14,9 @@ const gulp = require('gulp'),
   clean = require('gulp-clean'),
   fs = require('fs'),
   gulpIf = require('gulp-if'),
+  gulpUtil = require('gulp-util'),
+  babel = require('gulp-babel'),
+  gulpZip = require('gulp-zip'),
   $ = require('gulp-load-plugins')();
 // gulp.task('js', function () {
 //     return gulp.src('dist/js/*.js').pipe(uglify())
@@ -121,7 +124,16 @@ gulp.task(
       .src('index.html')
       .pipe($.useref()) /**找到注释 */
       .pipe(jsFilter) /**筛选js */
+      .pipe(
+        babel({
+          presets: ['es2015'],
+          compact: false
+        })
+      )
       .pipe(uglify()) /**压缩js */
+      .on('error', err => {
+        gulpUtil.log(gulpUtil.colors.red('Error'), err.toString());
+      })
       .pipe(jsFilter.restore) /** 把js文件扔回流里 */
       .pipe(cssFilter)
       // .pipe(minifyCss())
@@ -136,6 +148,10 @@ gulp.task(
       // .pipe(minifyHtml()) // 压缩后 js报错
       // .pipe(miniHtml({ removeComments: true }))
       .pipe(gulp.dest('build'));
+    // gulp
+    //   .src('build')
+    //   .pipe(gulpZip('myWorld.zip'))
+    //   .pipe(gulp.dest('build-zip'));
     done();
   })
 );

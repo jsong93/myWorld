@@ -143,7 +143,7 @@ function init() {
   //   'url("' + container.querySelector('canvas').toDataURL() + '")';
   initComputeRenderer();
 
-  stats = new Stats();
+  // stats = new Stats();
   // jsong hide fps
   // container.appendChild(stats.dom);
 
@@ -156,7 +156,7 @@ function init() {
   window.addEventListener('resize', onWindowResize, false);
 
   // jsong hide option controll
-  // var gui = new dat.GUI();
+  // var gui = new dat.GUI();/
 
   var effectController = {
     separation: 20.0,
@@ -340,7 +340,8 @@ function animate() {
   requestAnimationFrame(animate);
 
   render();
-  stats.update();
+  // jsong hide
+  // stats.update();
 }
 
 function render() {

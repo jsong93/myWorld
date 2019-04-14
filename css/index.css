@@ -23,10 +23,10 @@ body {
   z-index: 1;
 }
 
-@font-face {
+/* @font-face {
   font-family: maobi;
   src: url('./font/maobi.TTF');
-}
+} */
 
 @font-face {
   font-family: hanwei;
