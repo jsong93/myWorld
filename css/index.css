@@ -1,0 +1,36 @@
+body {
+  overflow: hidden;
+}
+
+#content {
+  position: absolute;
+  z-index: 1;
+
+  font-family: hanwei;
+  font-size: 50px;
+}
+
+#bgImg {
+  height: 100%;
+  width: 100%;
+  background: url('../img/bg/snow.jpg') no-repeat;
+  position: absolute;
+  opacity: 0.7;
+  overflow: hidden;
+}
+#Snow {
+  position: absolute;
+  z-index: 1;
+}
+
+@font-face {
+  font-family: maobi;
+  src: url('./font/maobi.TTF');
+}
+
+@font-face {
+  font-family: hanwei;
+  src: url('./font/HYShangWeiShouShuW.ttf');
+}
+/* #content {
+} */

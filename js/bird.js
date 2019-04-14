@@ -115,7 +115,8 @@ init();
 animate();
 
 function init() {
-  container = document.createElement('div');
+  const container = document.querySelector('#canvasBackground');
+  // container = document.createElement('div');
   document.body.appendChild(container);
 
   camera = new THREE.PerspectiveCamera(
@@ -134,11 +135,17 @@ function init() {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
-
+  // document
+  //   .querySelector('#canvasBackground canvas')
+  //   .getContext('2d')
+  //   .toDataURL();
+  // document.body.style.backgroundImage =
+  //   'url("' + container.querySelector('canvas').toDataURL() + '")';
   initComputeRenderer();
 
   stats = new Stats();
-  container.appendChild(stats.dom);
+  // jsong hide fps
+  // container.appendChild(stats.dom);
 
   document.addEventListener('mousemove', onDocumentMouseMove, false);
   document.addEventListener('touchstart', onDocumentTouchStart, false);
@@ -148,7 +155,8 @@ function init() {
 
   window.addEventListener('resize', onWindowResize, false);
 
-  var gui = new dat.GUI();
+  // jsong hide option controll
+  // var gui = new dat.GUI();
 
   var effectController = {
     separation: 20.0,
@@ -166,16 +174,17 @@ function init() {
 
   valuesChanger();
 
-  gui
-    .add(effectController, 'separation', 0.0, 100.0, 1.0)
-    .onChange(valuesChanger);
-  gui
-    .add(effectController, 'alignment', 0.0, 100, 0.001)
-    .onChange(valuesChanger);
-  gui
-    .add(effectController, 'cohesion', 0.0, 100, 0.025)
-    .onChange(valuesChanger);
-  gui.close();
+  // jsong hide option control
+  // gui
+  //   .add(effectController, 'separation', 0.0, 100.0, 1.0)
+  //   .onChange(valuesChanger);
+  // gui
+  //   .add(effectController, 'alignment', 0.0, 100, 0.001)
+  //   .onChange(valuesChanger);
+  // gui
+  //   .add(effectController, 'cohesion', 0.0, 100, 0.025)
+  //   .onChange(valuesChanger);
+  // gui.close();
 
   initBirds();
 }

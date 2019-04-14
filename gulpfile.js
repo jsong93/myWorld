@@ -1,6 +1,6 @@
 const gulp = require('gulp'),
-  uglify = require('gulp-uglify'),
-  rename = require('gulp-rename'),
+  uglify = require('gulp-uglify'), // 压缩文件
+  rename = require('gulp-rename'), // 重命名
   jshint = require('gulp-jshint'),
   minifyHtml = require('gulp-minify-html'),
   miniHtml = require('gulp-htmlmin'),
@@ -32,7 +32,7 @@ const gulp = require('gulp'),
 gulp.task('script', done => {
   gulp
     .src('./node_modules/jquery/dist/jquery.min.js')
-    .pipe(uglify())
+    .pipe($.uglify())
     .pipe(rename('script.js'))
     .pipe(gulp.dest('build'));
   done();
@@ -75,7 +75,12 @@ gulp.task('image', done => {
         interlaced: true
       })
     )
-    .pipe(gulp.dest('build/css/img'));
+    .pipe(gulp.dest('build/img'));
+  done();
+});
+
+gulp.task('font', done => {
+  gulp.src('./css/font/**').pipe(gulp.dest('build/css/font'));
   done();
 });
 
@@ -98,7 +103,7 @@ gulp.task('clean', d => {
 
 gulp.task(
   'default',
-  gulp.series('clean', 'image', done => {
+  gulp.series('clean', 'font', 'image', done => {
     const jsFilter = filter('**/*.js', {
         restore: true
       }),
@@ -119,6 +124,7 @@ gulp.task(
       .pipe(uglify()) /**压缩js */
       .pipe(jsFilter.restore) /** 把js文件扔回流里 */
       .pipe(cssFilter)
+      // .pipe(minifyCss())
       .pipe(csso())
       .pipe(cssFilter.restore)
       .pipe(indexHtmlFilter)
