@@ -87,6 +87,11 @@ gulp.task('font', done => {
   done();
 });
 
+gulp.task('music', done => {
+  gulp.src('./music/**').pipe(gulp.dest('build/music'));
+  done();
+});
+
 const checkDir = path => {
   console.log(fs.existsSync(path));
   return fs.existsSync(path);
@@ -106,7 +111,7 @@ gulp.task('clean', d => {
 
 gulp.task(
   'default',
-  gulp.series('clean', 'font', 'image', done => {
+  gulp.series('clean', 'font', 'music', 'image', done => {
     const jsFilter = filter('**/*.js', {
         restore: true
       }),
