@@ -27,6 +27,25 @@ body {
   z-index: 1;
 }
 
+#barrage {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+
+.barrage-span {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  /* liner 匀速 */
+  transition: transform 7s linear;
+}
+
+/* .barrage:hover {
+  cursor: pointer;
+  transform: translateX(-90vw);
+} */
+
 /* @font-face {
   font-family: maobi;
   src: url('./font/maobi.TTF');
