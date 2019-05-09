@@ -39,14 +39,14 @@ body {
 }
 
 .barrage-span {
-  /* position: absolute; */
-  top: 0px;
+  position: fixed;
+  /* top: 0px; */
   right: 0px;
   float: right;
-  margin-right: 8vw;
+  /* margin-right: 8vw; */
   transform: translateX(80vw);
   /* liner 匀速 */
-  transition: transform 10s linear;
+  transition: transform 17s linear;
 }
 
 /* .barrage:hover {
