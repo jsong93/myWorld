@@ -43,7 +43,7 @@ body {
   /* top: 0px; */
   right: 0px;
   float: right;
-  /* margin-right: 8vw; */
+  margin-right: 5vw;
   transform: translateX(80vw);
   /* liner 匀速 */
   transition: transform 17s linear;

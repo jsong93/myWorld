@@ -111,7 +111,7 @@ gulp.task('clean', d => {
 
 gulp.task(
   'default',
-  gulp.series('clean', 'font', 'music', 'image', done => {
+  gulp.series('clean', 'font', 'image', done => {
     const jsFilter = filter('**/*.js', {
         restore: true
       }),

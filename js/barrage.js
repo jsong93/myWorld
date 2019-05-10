@@ -128,6 +128,7 @@
     }
     if (!success) {
       // 会卡 为社么呢 掉多了吗
+      // 防抖
       //   setTimeout(shoot(text), 3000);
     }
   }
