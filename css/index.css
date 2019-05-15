@@ -5,7 +5,7 @@ body {
 
 #content {
   position: absolute;
-  z-index: 1;
+  z-index: 10;
 
   font-family: hanwei;
   /* font-size: 5rem; */
@@ -31,6 +31,7 @@ body {
   position: absolute;
   top: 0px;
   width: 100%;
+  z-index: -1;
 }
 
 .barrage {
@@ -49,6 +50,13 @@ body {
   transition: transform 17s linear;
 }
 
+#welcome {
+  height: 70vh;
+}
+
+.barrage-input {
+  width: 20vw !important;
+}
 /* .barrage:hover {
   cursor: pointer;
   transform: translateX(-90vw);

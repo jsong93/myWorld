@@ -44,6 +44,11 @@
   //   const dom = document.querySelector('.barrage');
   const dom = document.querySelector('#barrage-board');
 
+  const shootButton = document.querySelector('#shoot');
+
+  shootButton.addEventListener('click', shootClick);
+  shootButton.addEventListener('touch', shootClick);
+
   const rows = 6,
     divPool = [];
   for (let i = 0; i < rows; i++) {
@@ -62,6 +67,16 @@
   //       }
   //     }
   //   }
+
+  function shootClick() {
+    const value = document.querySelector('#shoot-text').value;
+    if (value && value.length) {
+      console.log('shoot ');
+      texts.unshift(value);
+      textsCopy.unshift(value);
+      document.querySelector('#shoot-text').value = null;
+    }
+  }
 
   function addSpan(div, text) {
     console.log(text);
