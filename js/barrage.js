@@ -46,8 +46,27 @@
 
   const shootButton = document.querySelector('#shoot');
 
+  const shootInput = document.querySelector('#shoot-text');
+
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText);
+        // _.dropRightWhile(xhr.responseText, ['id', 'title']);
+      } else {
+        console.error(xhr.statusText);
+      }
+    }
+  };
+
+  xhr.onerror = () => {
+    console.error(xhr.statusText);
+  };
+  xhr.open('get', '/barrage', true);
+  xhr.send();
   shootButton.addEventListener('click', shootClick);
-  shootButton.addEventListener('touch', shootClick);
+  // shootButton.addEventListener('touch', shootClick);
 
   const rows = 6,
     divPool = [];
@@ -71,15 +90,33 @@
   function shootClick() {
     const value = document.querySelector('#shoot-text').value;
     if (value && value.length) {
-      console.log('shoot ');
+      // console.log('shoot ');
       texts.unshift(value);
       textsCopy.unshift(value);
-      document.querySelector('#shoot-text').value = null;
+      shootInput.value = null;
+      shootInput.blur();
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            console.log(xhr.responseText);
+          } else {
+            console.error(xhr.statusText);
+          }
+        }
+      };
+
+      xhr.onerror = () => {
+        console.error(xhr.statusText);
+      };
+      xhr.open('post', '/barrage', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({ barrage: value }));
     }
   }
 
   function addSpan(div, text) {
-    console.log(text);
+    // console.log(text);
     const span = document.createElement('span');
     span.className = 'barrage-span';
     span.innerHTML = text;
@@ -107,7 +144,7 @@
   }
 
   function shoot(text) {
-    console.log(text);
+    // console.log(text);
     let success = false;
     for (const div of divPool) {
       if (div.children) {
@@ -124,7 +161,7 @@
           //     console.log(1);
           //     continue;
           //   }
-          console.log(transformX, windowX, domX);
+          // console.log(transformX, windowX, domX);
           if (transformX < 0 || transformX + domX < windowX * 0.2) {
             addSpan(div, text);
             success = true;

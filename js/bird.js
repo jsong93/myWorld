@@ -147,9 +147,21 @@ function init() {
   // jsong hide fps
   // container.appendChild(stats.dom);
 
-  document.addEventListener('mousemove', onDocumentMouseMove, false);
+  // https://www.jianshu.com/p/04bf173826aa
+  //   [Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive.
+  // See https://www.chromestatus.com/features/5093566007214080
+  // document.addEventListener('mousemove', onDocumentMouseMove, false);
   document.addEventListener('touchstart', onDocumentTouchStart, false);
   document.addEventListener('touchmove', onDocumentTouchMove, false);
+  document.addEventListener('mousemove', onDocumentMouseMove, {
+    passive: false
+  });
+  // document.addEventListener('touchstart', onDocumentTouchStart, {
+  //   passive: false
+  // });
+  // document.addEventListener('touchmove', onDocumentTouchMove, {
+  //   passive: false
+  // });
 
   //
 
@@ -318,7 +330,6 @@ function onDocumentMouseMove(event) {
 
 function onDocumentTouchStart(event) {
   if (event.touches.length === 1) {
-    
     // event.preventDefault();
 
     mouseX = event.touches[0].pageX - windowHalfX;

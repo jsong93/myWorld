@@ -50,12 +50,17 @@ body {
   transition: transform 17s linear;
 }
 
-#welcome {
+#item {
   height: 70vh;
 }
 
 .barrage-input {
-  width: 20vw !important;
+  width: 50vw !important;
+}
+
+button,
+input {
+  outline: none;
 }
 /* .barrage:hover {
   cursor: pointer;

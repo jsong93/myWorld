@@ -14,7 +14,7 @@
   var flakes = [],
     canvas = document.getElementById('Snow'), //画布ID，与上一步创建的画布对应
     ctx = canvas.getContext('2d'),
-    flakeCount = 200, //雪花数量，数值越大雪花数量越多
+    flakeCount = window.innerWidth / 5, //雪花数量，数值越大雪花数量越多
     mX = -100,
     mY = -100;
 
