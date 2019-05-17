@@ -65,6 +65,7 @@
   };
   xhr.open('get', '/barrage', true);
   xhr.send();
+
   shootButton.addEventListener('click', shootClick);
   // shootButton.addEventListener('touch', shootClick);
 
