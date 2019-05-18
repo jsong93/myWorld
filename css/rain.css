@@ -1,3 +1,121 @@
+@keyframes moon {
+  0% {
+    top: 200px;
+    left: 0;
+  }
+  100% {
+    top: 45px;
+    left: 55px;
+  }
+}
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 10px 0 #f6edbd;
+  }
+  50% {
+    box-shadow: 0 0 20px 0 #f6edbd;
+  }
+}
+
+.moon {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 45px;
+  left: 55px;
+  border-radius: 50%;
+  background: #f6edbd;
+  box-shadow: 0 0 10px 0 #f6edbd;
+  animation: moon 3s ease-out, glow 5s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.moon .crater {
+  background-color: #ece1a8;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.moon .crater-1,
+.moon .crater-2,
+.moon .crater-3 {
+  width: 24px;
+  height: 24px;
+}
+
+.moon .crater-4,
+.moon .crater-5,
+.moon .crater-6,
+.moon .crater-7,
+.moon .crater-8,
+.moon .crater-9 {
+  width: 12px;
+  height: 12px;
+}
+
+.moon .crater-10,
+.moon .crater-11 {
+  width: 8px;
+  height: 8px;
+}
+
+.moon .crater-1 {
+  top: 90px;
+  left: 100px;
+}
+
+.moon .crater-2 {
+  top: 80px;
+  left: 70;
+}
+
+.moon .crater-3 {
+  top: 125px;
+  left: 80px;
+}
+
+.moon .crater-4 {
+  top: 105px;
+  left: 60px;
+}
+
+.moon .crater-5 {
+  top: 95px;
+  left: 130px;
+}
+
+.moon .crater-6 {
+  top: 125px;
+  left: 45px;
+}
+
+.moon .crater-7 {
+  top: 55px;
+  left: 75px;
+}
+
+.moon .crater-8 {
+  top: 70px;
+  left: 65px;
+}
+
+.moon .crater-9 {
+  top: 40px;
+  left: 115px;
+}
+
+.moon .crater-10 {
+  top: 45px;
+  left: 30px;
+}
+
+.moon .crater-11 {
+  top: 10px;
+  left: 35px;
+}
+
+/* 
 .moon {
   position: absolute;
   width: 10vw;
@@ -7,7 +125,7 @@
   border-radius: 50%;
   background: #f6edbd;
   box-shadow: 0 0 10px 0 #f6edbd;
-  animation: moon 1s ease-out, glow 5s ease-in-out infinite;
+  animation: moon 5s ease-out, glow 5s ease-in-out infinite;
   overflow: hidden;
   z-index: 2;
 }
@@ -21,8 +139,8 @@
 .moon .crater-1,
 .moon .crater-2,
 .moon .crater-3 {
-  width: 12px;
-  height: 12px;
+  width: 4vh;
+  height: 4vh;
 }
 
 .moon .crater-4,
@@ -31,14 +149,14 @@
 .moon .crater-7,
 .moon .crater-8,
 .moon .crater-9 {
-  width: 6px;
-  height: 6px;
+  width: 5vh;
+  height: 5vh;
 }
 
 .moon .crater-10,
 .moon .crater-11 {
-  width: 4px;
-  height: 4px;
+  width: 3vh;
+  height: 3vh;
 }
 
 .moon .crater-1 {
@@ -47,51 +165,51 @@
 }
 
 .moon .crater-2 {
-  top: 10px;
-  left: 0;
+  top: 19vh;
+  left: 7vh;
 }
 
 .moon .crater-3 {
-  top: 55px;
-  left: 10px;
+  top: 5vh;
+  left: 18vh;
 }
 
 .moon .crater-4 {
-  top: 35px;
-  left: 50px;
+  top: 12vh;
+  left: 14vh;
 }
 
 .moon .crater-5 {
-  top: 25px;
-  left: 60px;
+  top: 30vh;
+  left: 40vh;
 }
 
 .moon .crater-6 {
-  top: 55px;
-  left: 35px;
+  top: 10vh;
+  left: 35vh;
 }
 
 .moon .crater-7 {
-  top: 15px;
-  left: 45px;
+  top: 18vh;
+  left: 28vh;
 }
 
 .moon .crater-8 {
-  top: 30px;
-  left: 25px;
+  top: 50vh;
+  left: 30vh;
 }
 
 .moon .crater-9 {
-  top: 40px;
-  left: 15px;
+  top: 40vh;
+  left: 19vh;
 }
 
 .moon .crater-10 {
-  top: 25px;
-  left: 15px;
+  top: 23vh;
+  left: 40vh;
 }
 
 .moon .crater-11 {
-  top: 40px;
-  left: 35px;
-}
+  top: 38vh;
+  left: 30vh;
+} */
