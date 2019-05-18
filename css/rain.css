@@ -29,6 +29,7 @@
   box-shadow: 0 0 10px 0 #f6edbd;
   animation: moon 3s ease-out, glow 5s ease-in-out infinite;
   overflow: hidden;
+  z-index: -1;
 }
 
 .moon .crater {

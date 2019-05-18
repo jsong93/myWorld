@@ -128,10 +128,13 @@ function init() {
   camera.position.z = 350;
 
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
+
+  // 注释掉 jsong20190518 不要背景颜色
+  // scene.background = new THREE.Color(0xffffff);
   scene.fog = new THREE.Fog(0xffffff, 100, 1000);
 
-  renderer = new THREE.WebGLRenderer();
+  // { antialias: true, alpha: true } 不要背景颜色
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);

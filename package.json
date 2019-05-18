@@ -2,7 +2,7 @@
   "name": "myworld",
   "version": "1.0.0",
   "description": "jsongs world",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "dat.gui": "^0.7.6",
+    "http-proxy": "^1.17.0",
     "jquery": "^3.4.0",
     "lodash": "^4.17.11",
     "stats": "^1.0.0",
