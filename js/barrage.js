@@ -1,59 +1,81 @@
-(() => {
-  let texts = [
-    'hold the door',
-    "I know death,He's got many faces",
-    "Nothing someone says before the word 'but' really counts",
-    'There is only one God ,and his name is Death',
-    " And there is only one thing we say to Death:'Not today'",
-    'A Lannister always pays his debts',
-    'Yow know nothing , Jon Snow',
-    '听我誓言，做吾见证',
-    '长夜将至，我从今开始守望',
-    '我将不娶妻，不封地，不生子',
-    '我将不戴王冠，不争荣宠',
-    '我将尽忠职守，生死于斯',
-    '我是黑暗中的利剑',
-    '长城上的守卫',
-    '抵御寒冷的烈焰',
-    '破晓时分的光线',
-    '唤醒眠者的号角',
-    '守护国王的坚盾',
-    '我将生命与荣耀献给守夜人',
-    '今夜如此，夜夜皆然',
-    'Valar Morghulis.Valar Dohaeris',
-    'The man who fears losing has already lost',
-    'Hear my words,and bear witness to my vow',
-    'Night gathers,and now my watch begins',
-    'I shall take no wife,hold no lands,father no children',
-    'I shall wear no crowns and win no glory',
-    'I shall live and die at my post',
-    'I am the sword in the darkness',
-    'I am the watcher on the walls',
-    'I am the fire that burns against the cold',
-    'the light that brings the dawn',
-    'the horn that wakes the sleepers',
-    'the shield that guards the realms of men',
-    "I pledge my life and honor to the Night's Watch",
-    'for this night',
-    'and all the nights to come'
-  ];
+// import { resolve } from 'dns';
+
+(_ => {
+  // let texts = [
+  //   'hold the door',
+  //   "I know death,He's got many faces",
+  //   "Nothing someone says before the word 'but' really counts",
+  //   'There is only one God ,and his name is Death',
+  //   " And there is only one thing we say to Death:'Not today'",
+  //   'A Lannister always pays his debts',
+  //   'Yow know nothing , Jon Snow',
+  //   '听我誓言，做吾见证',
+  //   '长夜将至，我从今开始守望',
+  //   '我将不娶妻，不封地，不生子',
+  //   '我将不戴王冠，不争荣宠',
+  //   '我将尽忠职守，生死于斯',
+  //   '我是黑暗中的利剑',
+  //   '长城上的守卫',
+  //   '抵御寒冷的烈焰',
+  //   '破晓时分的光线',
+  //   '唤醒眠者的号角',
+  //   '守护国王的坚盾',
+  //   '我将生命与荣耀献给守夜人',
+  //   '今夜如此，夜夜皆然',
+  //   'Valar Morghulis.Valar Dohaeris',
+  //   'The man who fears losing has already lost',
+  //   'Hear my words,and bear witness to my vow',
+  //   'Night gathers,and now my watch begins',
+  //   'I shall take no wife,hold no lands,father no children',
+  //   'I shall wear no crowns and win no glory',
+  //   'I shall live and die at my post',
+  //   'I am the sword in the darkness',
+  //   'I am the watcher on the walls',
+  //   'I am the fire that burns against the cold',
+  //   'the light that brings the dawn',
+  //   'the horn that wakes the sleepers',
+  //   'the shield that guards the realms of men',
+  //   "I pledge my life and honor to the Night's Watch",
+  //   'for this night',
+  //   'and all the nights to come'
+  // ];
 
   //   let texts = ['hold the door', '19', '17', '16', '15', '14', '13', '12'];
 
-  let textsCopy = [...texts];
+  // let textsCopy = [...texts];
+  let texts = [],
+    textsCopy = [];
   //   const dom = document.querySelector('.barrage');
-  const dom = document.querySelector('#barrage-board');
-
-  const shootButton = document.querySelector('#shoot');
-
-  const shootInput = document.querySelector('#shoot-text');
-
-  const xhr = new XMLHttpRequest();
+  const dom = document.querySelector('#barrage-board'),
+    shootButton = document.querySelector('#shoot'),
+    shootInput = document.querySelector('#shoot-text'),
+    xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
-        // _.dropRightWhile(xhr.responseText, ['id', 'title']);
+
+        // const promise = new Promise(resolve => {
+        //   resolve(_.map(JSON.parse(xhr.responseText), 'content'));
+        // });
+        // promise.then(value => {
+        //   setInterval(() => {
+        //     if (textsCopy.length) {
+        //       shoot(textsCopy.shift());
+        //     } else {
+        //       textsCopy = [...texts];
+        //     }
+        //   }, 1000);
+        // });
+        texts = _.map(JSON.parse(xhr.responseText), 'content');
+        textsCopy = [...texts];
+        setInterval(() => {
+          if (textsCopy.length) {
+            shoot(textsCopy.shift());
+          } else {
+            textsCopy = [...texts];
+          }
+        }, 1000);
       } else {
         console.error(xhr.statusText);
       }
@@ -65,6 +87,21 @@
   };
   xhr.open('get', '/barrage', true);
   xhr.send();
+
+  const postXhr = new XMLHttpRequest();
+  postXhr.onreadystatechange = () => {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText);
+      } else {
+        console.error(xhr.statusText);
+      }
+    }
+  };
+
+  postXhr.onerror = () => {
+    console.error(xhr.statusText);
+  };
 
   shootButton.addEventListener('click', shootClick);
   // shootButton.addEventListener('touch', shootClick);
@@ -97,22 +134,9 @@
       shootInput.value = null;
       shootInput.blur();
 
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            console.log(xhr.responseText);
-          } else {
-            console.error(xhr.statusText);
-          }
-        }
-      };
-
-      xhr.onerror = () => {
-        console.error(xhr.statusText);
-      };
-      xhr.open('post', '/barrage', true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify({ barrage: value }));
+      postXhr.open('post', '/barrage', true);
+      postXhr.setRequestHeader('Content-Type', 'application/json');
+      postXhr.send(JSON.stringify({ barrage: value }));
     }
   }
 
@@ -186,19 +210,4 @@
     }
   }
   //   shoot();
-
-  setInterval(() => {
-    if (textsCopy.length) {
-      shoot(textsCopy.shift());
-    } else {
-      textsCopy = [...texts];
-    }
-    // console.log(
-    //   window
-    //     .getComputedStyle(divPool[0].children[0])
-    //     .getPropertyValue('transform')
-    // );
-    // console.log(divPool[0].children[0].offsetLeft);
-    // console.log(divPool[0].children[0].scrollLeft);
-  }, 1000);
-})();
+})(_);
