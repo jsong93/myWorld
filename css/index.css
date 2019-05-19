@@ -63,6 +63,13 @@ button,
 input {
   outline: none;
 }
+
+#input-value {
+  font-size: 3vw;
+  height: 3vw;
+  color: #ffffff00;
+  /* animation: text-an 1.5s linear infinite; */
+}
 /* .barrage:hover {
   cursor: pointer;
   transform: translateX(-90vw);
@@ -79,3 +86,12 @@ input {
 }
 /* #content {
 } */
+
+@keyframes text-an {
+  0% {
+    text-shadow: 0 0 0 #1a1818;
+  }
+  100% {
+    text-shadow: 0 -100vh 1vw #ffffff;
+  }
+}

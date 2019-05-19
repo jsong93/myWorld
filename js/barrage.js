@@ -49,6 +49,7 @@
   const dom = document.querySelector('#barrage-board'),
     shootButton = document.querySelector('#shoot'),
     shootInput = document.querySelector('#shoot-text'),
+    inputValue = document.querySelector('#input-value'),
     xhr = new XMLHttpRequest();
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) {
@@ -132,6 +133,12 @@
       texts.unshift(value);
       textsCopy.unshift(value);
       shootInput.value = null;
+      inputValue.innerHTML = value;
+      inputValue.style.animation = 'text-an 5s linear 1';
+      setTimeout(() => {
+        inputValue.style.animation = null;
+      }, 500);
+
       shootInput.blur();
 
       postXhr.open('post', '/barrage', true);
