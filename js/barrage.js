@@ -86,22 +86,22 @@
   xhr.onerror = () => {
     console.error(xhr.statusText);
   };
-  xhr.open('get', '/barrage', true);
+  xhr.open('GET', '/barrage', true);
   xhr.send();
 
   const postXhr = new XMLHttpRequest();
   postXhr.onreadystatechange = () => {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        console.log(xhr.responseText);
+    if (postXhr.readyState === 4) {
+      if (postXhr.status === 200) {
+        console.log(postXhr.responseText);
       } else {
-        console.error(xhr.statusText);
+        console.error(postXhr.statusText);
       }
     }
   };
 
   postXhr.onerror = () => {
-    console.error(xhr.statusText);
+    console.error(postXhr.statusText);
   };
 
   shootButton.addEventListener('click', shootClick);
@@ -140,8 +140,11 @@
       }, 500);
 
       shootInput.blur();
-
-      postXhr.open('post', '/barrage', true);
+      // 在linux环境中会发生重定向，301，在windows中没事
+      // postXhr.open('POST', '/barrage', true);
+      // 在windows中有问题，这是什么鬼
+      // nginx配错了 傻x
+      postXhr.open('POST', '/barrage', true);
       postXhr.setRequestHeader('Content-Type', 'application/json');
       postXhr.send(JSON.stringify({ barrage: value }));
     }
