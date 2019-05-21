@@ -115,3 +115,10 @@
   });
   init();
 })();
+
+// jsonp test
+// function jsonp(data) {
+//   console.log(`data:${data}`);
+// }
+
+// cb('jsong');
