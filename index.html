@@ -31,6 +31,7 @@
       rel="stylesheet"
       href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="./css/viewer.css" />
     <!-- endbuild -->
   </head>
 
@@ -54,6 +55,13 @@
       <div class="row">
         <div class="col-md-1"></div>
         <div class="users-window ">
+          <div class="left">
+            <div id="viewer" style="width:600px; height:400px;"></div>
+            <div id="anims"></div>
+          </div>
+          <div class="right">
+            <div id="champions"></div>
+          </div>
           <div id="input-value"></div>
           <input
             id="shoot-text"
@@ -94,6 +102,14 @@
       <span id="options"></span>
       <!-- birds<br /> -->
     </div>
+
+    <!-- <div class="left">
+      <div id="viewer" style="width:600px; height:400px;"></div>
+      <div id="anims"></div>
+    </div>
+    <div class="right">
+      <div id="champions"></div>
+    </div> -->
 
     <!-- shader for bird's position -->
     <script id="fragmentShaderPosition" type="x-shader/x-fragment">
@@ -373,6 +389,9 @@
     <script src="./app.js" async defer></script>
     <script src="./js/snow.js" async defer></script>
     <script src="./js/barrage.js" async defer></script>
+    <script src="./js/viewer.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/modelviewer.js"></script>
     <!-- endbuild -->
   </body>
 </html>
