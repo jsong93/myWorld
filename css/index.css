@@ -6,8 +6,9 @@ body {
 #content {
   position: absolute;
   z-index: 10;
-
-  font-family: hanwei;
+  font-family: SimHei;
+  /* 不要字体了，我的服务器卡爆了 */
+  /* font-family: hanwei; */
   /* font-size: 5rem; */
   font-size: 3vw;
 }
@@ -17,6 +18,7 @@ body {
   width: 100%;
   background: url('../img/bg/snow.jpg') no-repeat;
   background-size: cover;
+  background-position: center center;
   /* background-size: contain; */
   position: absolute;
   /* opacity: 0.7; */
@@ -78,11 +80,12 @@ input {
   font-family: maobi;
   src: url('./font/maobi.TTF');
 } */
-
-@font-face {
+/* 太卡了  我的服务器不行了*/
+/* @font-face {
   font-family: hanwei;
   src: url('./font/HYShangWeiShouShuW.ttf');
-}
+} */
+
 /* #content {
 } */
 

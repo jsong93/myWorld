@@ -10,9 +10,12 @@ var WIDTH = hash || 32;
 
 var BIRDS = WIDTH * WIDTH;
 
+// const BIRDS = 256;
+
 // Custom Geometry - using 3 triangles each. No UVs, no normals currently.
 THREE.BirdGeometry = function() {
   var triangles = BIRDS * 3;
+  // var triangles = 1024 * 3;
   var points = triangles * 3;
 
   THREE.BufferGeometry.call(this);
@@ -86,6 +89,8 @@ var BOUNDS = 800,
 // jsong hide
 // document.getElementById('birds').innerText = BIRDS;
 
+// jsong 鸟的数量
+// change(2);
 function change(n) {
   location.hash = n;
   location.reload();

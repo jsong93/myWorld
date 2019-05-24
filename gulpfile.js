@@ -17,6 +17,7 @@ const gulp = require('gulp'),
   gulpUtil = require('gulp-util'),
   babel = require('gulp-babel'),
   gulpZip = require('gulp-zip'),
+  del = require('del'),
   $ = require('gulp-load-plugins')();
 // gulp.task('js', function () {
 //     return gulp.src('dist/js/*.js').pipe(uglify())
@@ -82,6 +83,12 @@ gulp.task('image', done => {
   done();
 });
 
+// hero
+gulp.task('hero', done => {
+  gulp.src('./resource/**').pipe(gulp.dest('build/resource'));
+  done();
+});
+
 gulp.task('font', done => {
   gulp.src('./css/font/**').pipe(gulp.dest('build/css/font'));
   done();
@@ -104,14 +111,14 @@ const checkDir = path => {
 // gulp.task('default', gulp.series('script', 'html', 'image', done => done()))
 gulp.task('clean', d => {
   if (checkDir('./build')) {
-    gulp.src('./build/').pipe(clean());
+    gulp.src('./build').pipe(del());
   }
   d();
 });
 
 gulp.task(
   'default',
-  gulp.series('clean', 'font', 'image', done => {
+  gulp.series('clean', 'font', 'image', 'hero', done => {
     const jsFilter = filter('**/*.js', {
         restore: true
       }),

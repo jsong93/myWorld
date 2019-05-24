@@ -40,7 +40,7 @@
       }
     };
   }
-})(this.jQuery);
+})($);
 (function(_global) {
   'use strict';
   var shim = {};
@@ -6148,8 +6148,10 @@ function ZamModelViewer(opts) {
   self.aspect = parseFloat(opts.aspect);
   self.renderer = null;
   self.options = opts;
-  var width = parseInt(self.container.width());
-  var height = Math.round(width / self.aspect);
+  // var width = parseInt(self.container.width());
+  // var height = Math.round(width / self.aspect);
+  const width = $(window).width() / 3;
+  const height = $(window).height() / 3;
   self.init(width, height);
 }
 ZamModelViewer.WEBGL = 1;
@@ -6395,36 +6397,37 @@ ZamModelViewer.WebGL.prototype = {
       totalSize += self.downloads[url].total;
       totalLoaded += self.downloads[url].loaded;
     }
-    if (totalSize <= 0) {
-      if (self.progressShown) {
-        self.progressBg.hide();
-        self.progressBar.hide();
-        self.progressShown = false;
-      }
-    } else {
-      if (!self.progressShown) {
-        self.progressBg.show();
-        self.progressBar.show();
-        self.progressShown = true;
-      }
-      var pct = totalLoaded / totalSize;
-      self.progressBar.width(Math.round(self.width * pct) + 'px');
-    }
+    // if (totalSize <= 0) {
+    //   if (self.progressShown) {
+    //     self.progressBg.hide();
+    //     self.progressBar.hide();
+    //     self.progressShown = false;
+    //   }
+    // } else {
+    //   if (!self.progressShown) {
+    //     self.progressBg.show();
+    //     self.progressBar.show();
+    //     self.progressShown = true;
+    //   }
+    //   var pct = totalLoaded / totalSize;
+    //   self.progressBar.width(Math.round(self.width * pct) + 'px');
+    // }
   },
   destroy: function() {
     var self = this;
     self.stop = true;
     if (self.canvas) {
       self.canvas.detach();
-      self.progressBg.detach();
-      self.progressBar.detach();
+      // self.progressBg.detach();
+      // self.progressBar.detach();
       self.canvas
         .off('mousedown touchstart', self.onMouseDown)
         .off('DOMMouseScroll', self.onMouseScroll)
         .off('mousewheel', self.onMouseWheel)
         // .off('dblclick', self.onDoubleClick)
         .off('contextmenu', self.onContextMenu);
-      $(window).off('resize', self.onFullscreen);
+      // $(window).off('resize', self.onFullscreen);
+      $(window).off('resize', self.resizeScreen);
       $(document)
         .off('mouseup touchend', self.onMouseUp)
         .off('mousemove touchmove', self.onMouseMove);
@@ -6538,8 +6541,12 @@ ZamModelViewer.WebGL.prototype = {
     self.updateCamera();
     // gl.clearColor(0, 0, 0, 1);
     // gl.clearColor(171.0/255.0, 190.0/255.0, 62.0/255.0, 1)
+
     // 透明
-    gl.clearColor(1, 1, 1, 0);
+    // 移动端 并不是透明的 web 透明
+    // gl.clearColor(1, 1, 1, 0);
+    // 移动 web 都透明
+    gl.clearColor(0, 0, 0, 0);
     // gl.clear(gl.COLOR_BUFFER_BIT);
     // gl.blendColor(1, 1, 1, 1);
     // gl.blendFuncSeparate(gl.SRC_COLOR, gl.DST_COLOR, gl.ONE, gl.ZERO);
@@ -6588,12 +6595,13 @@ ZamModelViewer.WebGL.prototype = {
   resize: function(width, height) {
     var self = this;
     if (self.width === width) return;
-    if (!self.fullscreen) {
-      self.viewer.container.css({
-        height: height + 'px',
-        position: 'relative'
-      });
-    }
+    // if (!self.fullscreen) {
+    //   self.viewer.container.css({
+    //     height: $(window).height() + 'px',
+    //     width: $(window).width() + 'px',
+    //     position: 'relative'
+    //   });
+    // }
     self.width = width;
     self.height = height;
     if (!self.canvas) {
@@ -6613,37 +6621,42 @@ ZamModelViewer.WebGL.prototype = {
       // 透明哦
       self.context =
         self.canvas[0].getContext('webgl', {
+          premultipliedAlpha: false,
+          antialias: true,
           alpha: true
         }) ||
         self.canvas[0].getContext('experimental-webgl', {
+          premultipliedAlpha: false,
+          antialias: true,
           alpha: true
         });
-      self.progressBg = $('<div/>', {
-        css: {
-          display: 'none',
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: '10px',
-          //   backgroundColor: '#000'
-          backgroundColor: '#fff'
-        }
-      });
-      self.progressBar = $('<div/>', {
-        css: {
-          display: 'none',
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          width: 0,
-          height: '10px',
-          //   backgroundColor: '#ccc'
-          backgroundColor: '#fff'
-        }
-      });
-      self.viewer.container.append(self.progressBg);
-      self.viewer.container.append(self.progressBar);
+      self.context.fillStyle = 'rgba(255, 255, 255, 0)';
+      // self.progressBg = $('<div/>', {
+      //   css: {
+      //     display: 'none',
+      //     position: 'absolute',
+      //     bottom: 0,
+      //     left: 0,
+      //     right: 0,
+      //     height: '10px',
+      //     //   backgroundColor: '#000'
+      //     backgroundColor: '#fff'
+      //   }
+      // });
+      // self.progressBar = $('<div/>', {
+      //   css: {
+      //     display: 'none',
+      //     position: 'absolute',
+      //     bottom: 0,
+      //     left: 0,
+      //     width: 0,
+      //     height: '10px',
+      //     //   backgroundColor: '#ccc'
+      //     backgroundColor: '#fff'
+      //   }
+      // });
+      // self.viewer.container.append(self.progressBg);
+      // self.viewer.container.append(self.progressBar);
       if (!self.context) {
         alert('No WebGL support, sorry! You should totally use Chrome.');
         self.canvas.detach();
@@ -6655,24 +6668,24 @@ ZamModelViewer.WebGL.prototype = {
           self.restoreWidth = self.width;
           self.restoreHeight = self.height;
           self.resized = true;
-          self.resize(640, 480);
-          mat4.perspective(
-            self.projMatrix,
-            self.fov * 0.0174532925,
-            640 / 480,
-            0.1,
-            5e3
-          );
+          // self.resize(640, 480);
+          // mat4.perspective(
+          //   self.projMatrix,
+          //   self.fov * 0.0174532925,
+          //   640 / 480,
+          //   0.1,
+          //   5e3
+          // );
         } else {
           self.resized = false;
           self.resize(self.restoreWidth, self.restoreHeight);
-          mat4.perspective(
-            self.projMatrix,
-            self.fov * 0.0174532925,
-            self.viewer.aspect,
-            0.1,
-            5e3
-          );
+          // mat4.perspective(
+          //   self.projMatrix,
+          //   self.fov * 0.0174532925,
+          //   self.viewer.aspect,
+          //   0.1,
+          //   5e3
+          // );
         }
       };
       self.onDoubleClick = function(event) {
@@ -6709,20 +6722,21 @@ ZamModelViewer.WebGL.prototype = {
         }
       };
 
+      // jsong resize
       self.resizeScreen = function(event) {
         // if (!self.fullscreen && ZamModelViewer.isFullscreen()) {
         self.restoreWidth = self.width;
         self.restoreHeight = self.height;
         // self.fullscreen = true;
         var $window = $(window);
-        self.resize($window.width() / 5, $window.height() / 5);
-        mat4.perspective(
-          self.projMatrix,
-          self.fov * 0.0174532925,
-          $window.width() / $window.height(),
-          0.1,
-          5e3
-        );
+        self.resize($window.width() / 3, $window.height() / 3);
+        // mat4.perspective(
+        //   self.projMatrix,
+        //   self.fov * 0.0174532925,
+        //   $window.width() / $window.height(),
+        //   0.1,
+        //   5e3
+        // );
         // } else if (self.fullscreen && !ZamModelViewer.isFullscreen()) {
         //   // self.fullscreen = false;
         //   self.resize(self.restoreWidth, self.restoreHeight);
@@ -6821,7 +6835,8 @@ ZamModelViewer.WebGL.prototype = {
         .on('mousewheel', self.onMouseWheel)
         // .on('dblclick', self.onDoubleClick)
         .on('contextmenu', self.onContextMenu);
-      $(window).on('resize', self.onFullscreen);
+      // $(window).on('resize', self.onFullscreen);
+      $(window).on('resize', self.resizeScreen);
       $(document)
         .on('mouseup touchend', self.onMouseUp)
         .on('mousemove touchmove', self.onMouseMove);

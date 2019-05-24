@@ -32,29 +32,35 @@ var setAnimation = function(anim) {
 var updateAnimations = function() {
   // 更新动画
   if (lkModelViewer && lkModelViewer.method('isLoaded')) {
-    var html = '';
-    var numAnims = lkModelViewer.method('getNumAnimations');
-    for (i = 0; i < numAnims; i++) {
-      var anim = lkModelViewer.method('getAnimation', i);
-      if (anim) {
-        var animName = anim;
-        var names = animNames.filter(o => {
-          return o.name == anim;
-        });
-        if (names.length > 0) {
-          animName = names[0].chinese;
-        }
-        html +=
-          '<button style="display:none" type="button" onclick="setAnimation(\'' +
-          anim +
-          '\')">' +
-          animName +
-          '</button>';
-      }
-    }
-    $('#anims').html(html);
+    // var html = '';
+    // var numAnims = lkModelViewer.method('getNumAnimations');
+    // for (i = 0; i < numAnims; i++) {
+    //   var anim = lkModelViewer.method('getAnimation', i);
+    //   if (anim) {
+    //     var animName = anim;
+    //     var names = animNames.filter(o => {
+    //       return o.name == anim;
+    //     });
+    //     if (names.length > 0) {
+    //       animName = names[0].chinese;
+    //     }
+    //     html +=
+    //       '<button style="display:none" type="button" onclick="setAnimation(\'' +
+    //       anim +
+    //       '\')">' +
+    //       animName +
+    //       '</button>';
+    //   }
+    // }
+    // $('#anims').html(html);
     let dance = ['dance', 'joke'];
-    setInterval(() => setAnimation(dance[Math.round(Math.random())]), 3000);
+    let action = '';
+    setInterval(() => {
+      if (action !== dance[Math.round(Math.random())]) {
+        action = dance[Math.round(Math.random())];
+        setAnimation(action);
+      }
+    }, 3000);
   } else {
     setTimeout(updateAnimations, 100);
   }
@@ -62,18 +68,18 @@ var updateAnimations = function() {
 
 // jsong 不要按钮了
 $(function() {
-  var html = '';
-  for (var i in champions) {
-    var champion = champions[i];
-    html +=
-      '<button style="display:none" type="button" onclick="loadModel(\'' +
-      champion.id +
-      '\', 0)">' +
-      champion.title +
-      '</button>';
-  }
-  $('#champions').html(html);
-  $('#champions input:eq(0)').attr('checked', true);
+  // var html = '';
+  // for (var i in champions) {
+  //   var champion = champions[i];
+  //   html +=
+  //     '<button style="display:none" type="button" onclick="loadModel(\'' +
+  //     champion.id +
+  //     '\', 0)">' +
+  //     champion.title +
+  //     '</button>';
+  // }
+  // $('#champions').html(html);
+  // $('#champions input:eq(0)').attr('checked', true);
   // 诺手
   //   loadModel('122', 0);
   // 德玛西亚
