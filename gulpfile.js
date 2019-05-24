@@ -90,8 +90,11 @@ gulp.task('hero', done => {
 });
 
 gulp.task('font', done => {
-  gulp.src('./css/font/**').pipe(gulp.dest('build/css/font'));
-  done();
+  // settimeout build 还没有删除玩就看是 build  会出问题
+  setTimeout(() => {
+    gulp.src('./css/font/**').pipe(gulp.dest('build/css/font'));
+    done();
+  }, 2000);
 });
 
 gulp.task('music', done => {
@@ -111,14 +114,16 @@ const checkDir = path => {
 // gulp.task('default', gulp.series('script', 'html', 'image', done => done()))
 gulp.task('clean', d => {
   if (checkDir('./build')) {
-    gulp.src('./build').pipe(del());
+    del(['build']);
+    // gulp.src('./build/').pipe(clean());
   }
   d();
 });
 
+// gulp.series 同步 gulp。parallel异步
 gulp.task(
   'default',
-  gulp.series('clean', 'font', 'image', 'hero', done => {
+  gulp.series('clean', 'font', gulp.parallel('image', 'hero'), done => {
     const jsFilter = filter('**/*.js', {
         restore: true
       }),
