@@ -5689,10 +5689,10 @@ text-hex@0.0.x:
   resolved "http://registry.npm.taobao.org/text-hex/download/text-hex-0.0.0.tgz#578fbc85a6a92636e42dd17b41d0218cce9eb2b3"
   integrity sha1-V4+8haapJjbkLdF7QdAhjM6esrM=
 
-three@^0.103.0:
-  version "0.103.0"
-  resolved "http://registry.npm.taobao.org/three/download/three-0.103.0.tgz#63b3dbccc861caad93269618061a73dadebae71b"
-  integrity sha1-Y7PbzMhhyq2TJpYYBhpz2t665xs=
+three@^0.125.0:
+  version "0.125.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.125.0.tgz#19e922b9dc51ad0b706893aeee888de68e99850a"
+  integrity sha512-qL36qUGsPQ/Ofo/RZdXwHwM7A8wzUSAIyawtjIebJSPvounUQeneSqxI0aBY2iwKpseGy+RUtj3C5f/z4poyXw==
 
 through2-concurrent@^2.0.0:
   version "2.0.0"
