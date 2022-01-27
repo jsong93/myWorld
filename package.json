@@ -16,7 +16,7 @@
     "lodash": "^4.17.11",
     "stats": "^1.0.0",
     "stats-js": "^1.0.0",
-    "three": "^0.103.0",
+    "three": "^0.137.0",
     "webgl": "^0.0.7"
   },
   "devDependencies": {
